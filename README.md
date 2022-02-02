@@ -3,11 +3,24 @@
 The best tutorial for building the cross compiler for Raspberry PI Zero W I've found there https://solarianprogrammer.com/2018/05/06/building-gcc-cross-compiler-raspberry-pi/
 However this tutorial needs some tweaking so that you can compile Java 17 and successfully run it on Raspberry PI Zero W. The linked tutorial has serveral external ressources and links, so I recommend to have a look at it.
 
+## Download prebuilt cross compiler environment
+
+In Releases you find for example cross-pi-gcc_gcc-10.1_glibc-2.28_binutils-2.31_Buster.rar. I've chosen rar format because file size is about 50 % compared to tar.gz in this case.
+This file name means gcc cross compiler for Raspberry PI Version 10.1 with glibc 2.28, binutils-2.31 and Buster as sysroot. This means it runs on Debian Buster and above.
+
+With ldd --version you get the glibc version of your system. It is important that your system has a glibc version equal or above the cross-pi cross compiler. You get the binutils version with ld -v. 
+
+Extract this to /opt/cross-pi-gcc and use with `export PATH=/opt/cross-pi-gcc/bin:/opt/cross-pi-gcc/libexec/gcc/arm-linux-gnueabihf/10.1.0:$PATH`
+
+Note: Change gcc version in export statement according to the gcc cross compiler version you have downloaded.
+
+## Creating gcc crosscompiler by yourself
+
 Versions may change, for example to compile gcc 10.2 I needed gcc 8.5.0, trying with gcc 8.3.0 lead to an error. Lets begin with gcc 10.1 which lead to a successful build of OpenJDK 17 for Raspberry PI Zero W https://github.com/JsBergbau/OpenJDK-Raspberry-Pi-Zero-W-armv6
 
 For this tutorial we will build the files in our homefolder. Debian 11 Bullseye 64 bit is used for build the the cross compiler. First gcc 8.3 is build and then with this gcc 10.1 is build, because otherwise there are errors in the build process.
 
-## First step, compile gcc 8.3.0 cross compiler
+### First step, compile gcc 8.3.0 cross compiler
 
 ```
 cd ~
@@ -131,7 +144,7 @@ make install
 cd ..
 ```
 
-### Test gcc 8.3.0 cross compiler
+#### Test gcc 8.3.0 cross compiler
 
 You can now compile a hello world program, transfer it to Raspberry PI Zero W and execute
 
@@ -144,7 +157,7 @@ int main() {
 ```
 Compile with `arm-linux-gnueabihf-g++ test.cpp -o hello`
 
-## Second and last step: Commpile gcc 10.1
+### Second and last step: Commpile gcc 10.1
 
 Edit `gcc-10.1.0/libsanitizer/asan/asan_linux.cpp` and add at about line 66 if there is no PATH_MAX
 
