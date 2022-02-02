@@ -179,6 +179,7 @@ sudo qemu-debootstrap \
   ~/sysroot-armhf \
   http://httpredir.debian.org/debian/
  ```
+ According to https://sourceware.org/glibc/wiki/FAQ#What_version_of_the_Linux_kernel_headers_should_be_used.3F it is better to use latest kernel headers, so next time `bullseye`should be used. 
 
 Ready to compile gcc 10.1
 ```
@@ -189,6 +190,8 @@ make -j 12
 make install
 ```
 Note: Sysroot has to be specified as absolute path, without I got errors.
+
+Very important is here `--enable-multiarch --with-sysroot=/home/pi/sysroot-armhf`. Without that compiling OpenJDK 17 will fail. 
 
 You can delete the gcc 8.3.0 folder in /opt/cross-pi-gcc/libexec/gcc/arm-linux-gnueabihf
 
