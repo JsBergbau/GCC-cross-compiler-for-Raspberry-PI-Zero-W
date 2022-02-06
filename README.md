@@ -179,6 +179,8 @@ sudo qemu-debootstrap \
   ~/sysroot-armhf \
   http://httpredir.debian.org/debian/
  ```
+ Adopt links via `sudo chroot ~/sysroot-armhf symlinks -cr .`
+ 
  According to https://sourceware.org/glibc/wiki/FAQ#What_version_of_the_Linux_kernel_headers_should_be_used.3F it is better to use latest kernel headers, so next time `bullseye`should be used. 
 
 Ready to compile gcc 10.1
