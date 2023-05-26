@@ -5,7 +5,8 @@ However this tutorial needs some tweaking so that you can compile Java 17 and su
 
 ## Download prebuilt cross compiler environment
 
-In Releases you find for example cross-pi-gcc_gcc-10.1_glibc-2.28_binutils-2.31_Buster.rar. I've chosen rar format because file size is about 50 % compared to tar.gz in this case.
+In Releases you find for example cross-pi-gcc_gcc-10.1_glibc-2.28_binutils-2.31_Buster.rar. I've chosen rar format because file size is about 50 % compared to tar.gz in this case. Update 26.05.2023 there is now a .tar.zst, but still ~32% larger than rar).
+
 This file name means gcc cross compiler for Raspberry PI Version 10.1 with glibc 2.28, binutils-2.31 and Buster as sysroot. This means it runs on Debian Buster and above.
 
 With ldd --version you get the glibc version of your system. It is important that your system has a glibc version equal or above the cross-pi cross compiler. You get the binutils version with ld -v. 
